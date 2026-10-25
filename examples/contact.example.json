@@ -1,0 +1,22 @@
+{
+  "contact": {
+    "first_name": "Ana",
+    "last_name": "Martínez López",
+    "display_name": "Ana Martínez",
+    "organization": "Estudio Ejemplo",
+    "title": "Gerencia Comercial",
+    "phone": "+525512345678",
+    "email": "ana.martinez@ejemplo.mx",
+    "website": "https://ejemplo.mx",
+    "address": "Av. Reforma 123, Col. Centro, CDMX, CP 06000"
+  },
+  "output": {
+    "basename": "QR Ana Martinez",
+    "dark": "#1A237E",
+    "light": "#FFFFFF",
+    "scale": 14,
+    "border": 4,
+    "error_level": "h",
+    "formats": ["png", "svg"]
+  }
+}

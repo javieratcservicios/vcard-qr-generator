@@ -1,0 +1,38 @@
+# ─── Salidas generadas ───
+*.png
+*.svg
+*.jpg
+*.jpeg
+!examples/*.png
+
+# ─── Configuraciones reales con datos personales ───
+contacto_*.json
+mi_*.json
+!examples/*.json
+
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ─── Pruebas ───
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ─── Editores y sistema ───
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ─── Logs ───
+*.log
