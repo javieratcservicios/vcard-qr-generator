@@ -4,6 +4,7 @@
 *.jpg
 *.jpeg
 !examples/*.png
+!docs/*.png
 
 # ─── Configuraciones reales con datos personales ───
 contacto_*.json

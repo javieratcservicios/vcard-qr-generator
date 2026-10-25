@@ -5,6 +5,11 @@ Escanear con la cámara → "Añadir contacto" → listo. Sin apps, sin escribir
 
 **Contact QR codes from a vCard 3.0 payload. Scan, add, done.**
 
+
+![QR de contacto vCard 3.0 listo para escanear](docs/example-qr.png)
+
+<sub>QR de contacto vCard 3.0 listo para escanear · vCard 3.0 contact QR code ready to scan</sub>
+
 ---
 
 ## Por qué existe
