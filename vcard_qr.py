@@ -57,9 +57,16 @@ def build_vcard(c: dict) -> str:
     Se usa 3.0 y no 4.0 porque es la versión con mejor compatibilidad
     universal: iOS, Android, macOS y Outlook la leen sin problemas.
     """
-    first = c.get("first_name", "")
-    last = c.get("last_name", "")
-    display = c.get("display_name") or f"{first} {last}".strip()
+    first = (c.get("first_name") or "").strip()
+    last = (c.get("last_name") or "").strip()
+    display = (c.get("display_name") or f"{first} {last}").strip()
+
+    # N: vacío hace que algunos lectores muestren el contacto en blanco.
+    # Si solo hay nombre a mostrar, se parte: primera palabra = nombre,
+    # el resto = apellidos ("Ana Martínez López" → Ana / Martínez López).
+    if not first and not last and display:
+        first, _, last = display.partition(" ")
+        last = last.strip()
 
     lines = [
         "BEGIN:VCARD",
@@ -102,7 +109,10 @@ def generate(vcard: str, out: dict, out_dir: Path) -> list[Path]:
     error_level = out.get("error_level", "h")
     formats = out.get("formats", ["png", "svg"])
 
-    qr = segno.make(vcard, error=error_level)
+    # encoding="utf-8" explícito: segno usa ISO-8859-1 cuando el texto cabe
+    # en ese juego, y la mayoría de los lectores decodifica como UTF-8, así
+    # que los acentos ("Martínez") salían como basura en el teléfono.
+    qr = segno.make(vcard, error=error_level, encoding="utf-8")
 
     written = []
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -128,6 +138,8 @@ def main() -> int:
     ap.add_argument("--org", help="Organización o empresa")
     ap.add_argument("--title", help="Puesto o cargo")
     ap.add_argument("--website", help="Sitio web")
+    ap.add_argument("--phone-work", help="Teléfono de oficina con código de país")
+    ap.add_argument("--address", help="Dirección (una sola línea)")
     ap.add_argument("--first-name", help="Nombre(s)")
     ap.add_argument("--last-name", help="Apellidos")
     args = ap.parse_args()
@@ -148,6 +160,8 @@ def main() -> int:
             "organization": args.org or "",
             "title": args.title or "",
             "website": args.website or "",
+            "phone_work": args.phone_work or "",
+            "address": args.address or "",
         }
         output = {"basename": f"QR {(args.name or 'contacto').strip()}"}
 

@@ -26,12 +26,14 @@ Y no hay que instalar nada: tanto iOS como Android leen vCard 3.0 de forma nativ
 - **Escapado correcto** de caracteres reservados (`;`, `,`, `\`) — el error más común al generar vCards a mano
 - **CRLF obligatorio** — vCard 3.0 lo exige; con `\n` algunos lectores ignoran campos
 - **Teléfono de trabajo opcional** además del celular
+- **UTF-8 forzado en el QR** — los acentos y la ñ llegan bien al teléfono
+- **Solo con `--name` basta** — si no das nombre y apellidos por separado, se parten solos (primera palabra = nombre)
 - **Colores y escala configurables**
 
 ## Instalación
 
 ```bash
-git clone https://github.com/TU_USUARIO/vcard-qr-generator.git
+git clone https://github.com/javieratcservicios/vcard-qr-generator.git
 cd vcard-qr-generator
 pip install segno
 ```
@@ -92,6 +94,8 @@ python vcard_qr.py \
 | `--email` | Correo electrónico |
 | `--org` / `--title` | Organización y puesto |
 | `--website` | Sitio web |
+| `--phone-work` | Teléfono de oficina con código de país |
+| `--address` | Dirección en una línea |
 
 ## Niveles de corrección de errores
 
